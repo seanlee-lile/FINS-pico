@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
+    <application android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen"
+        android:label="IWIN LAN XR" android:usesCleartextTraffic="true"
+        android:allowBackup="false" android:supportsRtl="true">
+        <meta-data android:name="pvr.app.type" android:value="vr" />
+        <activity android:name="com.iwin.application.XrActivity" android:exported="true"
+            android:launchMode="singleTask" android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard|navigation|uiMode|density">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="org.khronos.openxr.intent.category.IMMERSIVE_HMD" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.iwin.application.MainActivity" android:exported="false" />
+    </application>
+</manifest>

@@ -1,0 +1,17 @@
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+__pycache__/
+*.pyc
+.tools/
+webtest/
+
+.cxx/
+.externalNativeBuild/
+*.apk
+*.aab
+*.apk.idsig
+*.jks
+*.keystore

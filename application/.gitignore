@@ -6,6 +6,7 @@ local.properties
 __pycache__/
 *.pyc
 .tools/
+webtest/
 
 .cxx/
 .externalNativeBuild/

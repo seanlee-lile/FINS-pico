@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(iwin_xr LANGUAGES CXX)
+find_package(OpenXR REQUIRED CONFIG)
+add_library(iwin_xr SHARED xr_renderer.cpp)
+target_compile_features(iwin_xr PRIVATE cxx_std_17)
+target_compile_definitions(iwin_xr PRIVATE XR_USE_PLATFORM_ANDROID XR_USE_GRAPHICS_API_OPENGL_ES)
+target_link_libraries(iwin_xr PRIVATE OpenXR::openxr_loader android log EGL GLESv3 jnigraphics)
