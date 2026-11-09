@@ -1,0 +1,36 @@
+# 本地 agent 规则（沿用原设置）
+/AGENTS.md
+
+# 编辑器与操作系统本地文件
+.idea/
+.vscode/
+.vs/
+*.iml
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Python 缓存与本地虚拟环境
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Android / Gradle 生成目录与本机 SDK 配置
+.gradle/
+.cxx/
+.externalNativeBuild/
+local.properties
+
+# Android 安装包和签名私钥；保留 Gradle Wrapper JAR
+*.apk
+*.aab
+*.apk.idsig
+*.jks
+*.keystore
+
+# 与 Android application 无关的 Unity 工程
+/hello/
+
+# 本机工具链、缓存、诊断临时文件（可按环境说明恢复）
+/application/.tools/

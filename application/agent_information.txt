@@ -1,0 +1,56 @@
+可将以下内容直接交给另一个 agent：
+
+**项目路径**
+
+- 工程：`F:\lab\IWIN-FINS\pico\pico\application`
+- 项目规则：`F:\lab\IWIN-FINS\pico\pico\AGENTS.md`
+- 模块：`communication`、`input`、`display`，其中 `display` 对应 Gradle 的 `:app`。
+- 必须显式指定工作目录，当前会话默认目录仍是旧的 OneDrive 路径。
+
+**Android 编译环境**
+
+- Windows，PowerShell。
+- JDK 17：`F:\unityhub\6000.5.9f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK`
+- Android SDK：`F:\lab\IWIN-FINS\pico\pico\application\.tools\android-sdk`
+- SDK Platform 35，Build-Tools 34.0.0。
+- Gradle 8.9，使用工程自带 Wrapper。
+- Android Gradle Plugin 8.7.3，Media3 1.5.1。
+- Java 17，compileSdk / targetSdk 35，minSdk 26。
+- 首次缺少缓存时，需要联网下载 Gradle 和 Maven 依赖。
+
+**编译命令**
+
+```powershell
+Set-Location 'F:\lab\IWIN-FINS\pico\pico\application'
+
+$env:JAVA_HOME = 'F:\unityhub\6000.5.9f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK'
+$env:ANDROID_HOME = "$PWD\.tools\android-sdk"
+$env:ANDROID_USER_HOME = "$PWD\.tools\android-user"
+$env:GRADLE_USER_HOME = "$PWD\.tools\gradle-home"
+
+.\gradlew.bat :app:assembleDebug :app:lintDebug --console=plain --no-daemon
+```
+
+产物：`F:\lab\IWIN-FINS\pico\pico\application\app-debug.apk`
+
+目前版本：`0.3.0`，versionCode `3`；已编译、安装并验证手机播放。
+
+**PC 端运行环境**
+
+- Python：`F:\py3.10\python.exe`，GUI 使用同目录 `pythonw.exe`。
+- Python 标准库及 tkinter，无需额外 Python 包。
+- FFmpeg：`application\.tools\python\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe`
+- GUI 启动：`application\Start-PC.vbs`
+- ADB：`F:\platform-tools-latest-windows\platform-tools\adb.exe`，工程 SDK 内也有一份。
+
+**当前会话沙箱权限**
+
+- 默认可写：`F:\OneDrive\Documents\ChatGPT\IWIN-FINS`、系统临时目录，以及会话指定的可视化目录。
+- 实际工程 `F:\lab\IWIN-FINS\pico\pico\application` **不在默认可写范围内**。
+- 修改工程、执行构建、安装 APK，以及访问受限的设备或进程信息时，本会话使用 `exec_command` 的 `sandbox_permissions: "require_escalated"`，由自动审批审核。
+- 网络访问已启用；沙箱提权不等于 Windows 管理员权限。
+- 另一个 agent 应以其自身会话权限为准，不能假设继承本会话审批。
+
+**工程约束**
+
+所有工作文件和临时文件放在 `F:\lab\IWIN-FINS\pico` 范围内；遵循最小修改原则。未经用户指定测试计划，不新增或修改测试文件。

@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.application' version '8.7.3' apply false
+    id 'com.android.library' version '8.7.3' apply false
+}
+
+// Keep Android Gradle Plugin's normal build output and also place the
+// installable APK directly beside this file for convenient access.
+project(':app').tasks.configureEach {
+    if (name == 'assembleDebug') {
+        doLast {
+            def builtApk = rootProject.project(':app').layout.buildDirectory
+                    .file('outputs/apk/debug/app-debug.apk').get().asFile
+            if (!builtApk.isFile()) {
+                throw new GradleException("Debug APK was not produced: ${builtApk}")
+            }
+            rootProject.copy {
+                from builtApk
+                into rootProject.layout.projectDirectory
+                rename { 'app-debug.apk' }
+            }
+        }
+    }
+}
